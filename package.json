@@ -1,8 +1,14 @@
 {
-  "name": "register-data-dapp",
+  "name": "registerdata",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@concordium/browser-wallet-api-helpers": "^2.5.0",
+    "@concordium/web-sdk": "^4.0.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
