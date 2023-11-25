@@ -7,8 +7,7 @@ import {
 } from "@concordium/web-sdk";
 import { Button, Link, Stack, TextField, Typography } from "@mui/material";
 import { FormEvent, useState } from "react";
-import { Buffer } from "buffer/";
-
+import { Buffer } from "buffer";
 export default function RegisterData() {
     let [state, setState] = useState({
         checking: false,
@@ -36,13 +35,18 @@ export default function RegisterData() {
         if (!account) {
             alert("Please connect");
         }
-
         try {
+
+            const cbor = require('cbor-web')
+
+            let encoded = cbor.encode(formValues.data);
+
+            console.log(encoded)
             const txnHash = await provider.sendTransaction(
                 account!,
                 AccountTransactionType.RegisterData,
                 {
-                    data: new DataBlob(sha256([Buffer.from(formValues.data)])),
+                    data: new DataBlob(encoded),
                 } as RegisterDataPayload
             );
 
@@ -80,7 +84,15 @@ export default function RegisterData() {
                     View Transaction <br />
                     {state.hash}
                 </Link>
-            )}
+
+            )
+            }
+            {state.hash && (
+                <p> Check manually using hash: {state.hash}</p>
+
+            )
+            }
+
             <Button
                 type="submit"
                 variant="contained"
@@ -88,8 +100,8 @@ export default function RegisterData() {
                 size="large"
                 disabled={state.checking}
             >
-                Register Data SHA256
+                CBOR Encode Register Data
             </Button>
-        </Stack>
+        </Stack >
     );
 }

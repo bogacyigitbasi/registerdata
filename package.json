@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@concordium/browser-wallet-api-helpers": "^2.5.0",
-    "@concordium/web-sdk": "^4.0.1",
+    "@concordium/web-sdk": "^7.1.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
@@ -16,9 +16,11 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "cbor-web": "^9.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "stream": "^0.0.2",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
