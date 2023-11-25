@@ -1,11 +1,6 @@
 import { detectConcordiumProvider } from "@concordium/browser-wallet-api-helpers";
-import {
-    BlockItemStatus,
-    CcdAmount,
-    TransactionHash,
-} from '@concordium/web-sdk';
 
-import { Button, Link, Stack, TextField, Typography } from "@mui/material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import { FormEvent, useState } from "react";
 
 export default function GetBlockItemStatus() {
@@ -14,11 +9,6 @@ export default function GetBlockItemStatus() {
         error: "",
         hash: "",
     });
-
-    let [trxstate, setTrxState] = useState({
-        status: "",
-        data: ""
-    })
 
     const submit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -66,11 +56,26 @@ export default function GetBlockItemStatus() {
                 console.log(
                     'blockItemStatus is "finalized" and therefore there is exactly one outcome \n'
                 );
-                alert("Transaction is `finalied` and therefore there is exactly one outcome");
-                const { summary } = blockItemStatus.outcome;
-                console.log('The transaction is of type:', summary);
-            }
 
+                try {
+
+                    let sum: Object = blockItemStatus.outcome.summary;
+
+                    type ObjectKey = keyof typeof sum;
+                    const registerObject = 'dataRegistered' as ObjectKey;
+                    const data = 'data' as ObjectKey;
+                    let registeredData = sum[registerObject][data];
+                    console.log(registeredData)
+                    const cbor = require('cbor-web')
+
+                    let decoded = cbor.decode(registeredData);
+                    alert("Registered data is: " + decoded)
+                } catch (error: any) {
+                    setState({ checking: false, error: error.message || error, hash: "" });
+                }
+
+            }
+            setState({ checking: false, error: "", hash: "" });
         }
         catch (error: any) {
             setState({ checking: false, error: error.message || error, hash: "" });
@@ -88,7 +93,7 @@ export default function GetBlockItemStatus() {
             <TextField
                 id="data"
                 name="data"
-                label="Data"
+                label="Transaction Hash"
                 variant="standard"
                 disabled={state.checking}
             />
@@ -104,7 +109,7 @@ export default function GetBlockItemStatus() {
                 variant="contained"
                 fullWidth
                 size="large"
-                disabled={state.checking}
+                disabled={state.checking} color="success"
             >
                 Get Registered Data
             </Button>

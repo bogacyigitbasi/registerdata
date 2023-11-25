@@ -8,6 +8,8 @@ import {
 import { Button, Link, Stack, TextField, Typography } from "@mui/material";
 import { FormEvent, useState } from "react";
 import { Buffer } from "buffer";
+
+
 export default function RegisterData() {
     let [state, setState] = useState({
         checking: false,
@@ -66,7 +68,7 @@ export default function RegisterData() {
             <TextField
                 id="data"
                 name="data"
-                label="Data"
+                label="Data to Register"
                 variant="standard"
                 disabled={state.checking}
             />
@@ -78,7 +80,8 @@ export default function RegisterData() {
             {state.checking && <Typography component="div">Checking..</Typography>}
             {state.hash && (
                 <Link
-                    href={`https://dashboard.testnet.concordium.com/lookup/${state.hash}`}
+                    // href={`https://dashboard.testnet.concordium.com/lookup/${state.hash}`}
+                    href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${state.hash}`}
                     target="_blank"
                 >
                     View Transaction <br />
@@ -99,6 +102,7 @@ export default function RegisterData() {
                 fullWidth
                 size="large"
                 disabled={state.checking}
+                color="success"
             >
                 CBOR Encode Register Data
             </Button>
