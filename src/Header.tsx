@@ -46,7 +46,7 @@ export default function Header(props: {
         <AppBar style={{ background: '#2E3B55' }}>
             <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Concordium Register Data
+                    Concordium RegisterData Simple Application
                 </Typography>
                 <Button color="inherit" onClick={connect} disabled={isConnected}>
                     {isConnected ? "Connected" : "Connect"}
