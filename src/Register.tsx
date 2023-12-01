@@ -14,6 +14,7 @@ export default function RegisterData() {
         checking: false,
         error: "",
         hash: "",
+        originalMessage: ""
     });
 
     const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -46,9 +47,9 @@ export default function RegisterData() {
                 } as RegisterDataPayload
             );
 
-            setState({ checking: false, error: "", hash: txnHash });
+            setState({ checking: false, error: "", hash: txnHash, originalMessage: formValues.data });
         } catch (error: any) {
-            setState({ checking: false, error: error.message || error, hash: "" });
+            setState({ checking: false, error: error.message || error, hash: "", originalMessage: "" });
         }
     };
 
@@ -84,6 +85,11 @@ export default function RegisterData() {
             )}
             {state.hash && (
                 <p> Check manually using hash: {state.hash}</p>
+
+            )
+            }
+            {state.hash && (
+                <p> Registered Original Message {state.originalMessage}</p>
 
             )
             }
