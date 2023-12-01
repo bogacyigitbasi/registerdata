@@ -82,6 +82,11 @@ export default function RegisterData() {
                     {state.hash}
                 </Link>
             )}
+            {state.hash && (
+                <p> Check manually using hash: {state.hash}</p>
+
+            )
+            }
             <Button
                 type="submit"
                 variant="contained"

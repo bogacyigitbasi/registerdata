@@ -66,10 +66,15 @@ export default function GetBlockItemStatus() {
                     const data = 'data' as ObjectKey;
                     let registeredData = sum[registerObject][data];
                     console.log(registeredData)
-                    const cbor = require('cbor-web')
 
-                    let decoded = cbor.decode(registeredData);
-                    alert("Registered data is: " + decoded)
+                    try {
+                        const cbor = require('cbor-web')
+
+                        let decoded = cbor.decode(registeredData);
+                        alert("Registered data is: " + decoded)
+                    } catch (error: any) {
+                        alert("Registered data is: " + registeredData)
+                    }
                 } catch (error: any) {
                     setState({ checking: false, error: error.message || error, hash: "" });
                 }
