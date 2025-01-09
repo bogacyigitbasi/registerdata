@@ -74,14 +74,29 @@ export default function RegisterData() {
             )}
             {state.checking && <Typography component="div">Checking..</Typography>}
             {state.hash && (
-                <Link
-                    href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${state.hash}`}
-                    // href={`https://dashboard.testnet.concordium.com/lookup/${state.hash}`}
-                    target="_blank"
-                >
-                    View Transaction <br />
-                    {state.hash}
-                </Link>
+                <div>
+                    <li>
+                        <Link
+                            // href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${state.hash}`}
+                            // href={`https://dashboard.testnet.concordium.com/lookup/${state.hash}`}
+                            href={`https://ccdexplorer.io/testnet/transaction/${state.hash}`}
+                            target="_blank"
+                        >
+                            View Transaction on ccdexplorer.io <br />
+                            {state.hash}
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={`https://testnet.ccdscan.io/?dcount=1&dentity=transaction&dhash=${state.hash}`}
+                            target="_blank"
+                        >
+                            View Transaction on ccdscan <br />
+                            {state.hash}
+                        </Link>
+                    </li>
+                </div>
+
             )}
             {state.hash && (
                 <p> Check manually using hash: {state.hash}</p>
